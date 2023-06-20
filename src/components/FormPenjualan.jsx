@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BiCheck } from "react-icons/bi";
 import moment from "moment";
 import { FiShoppingCart } from "react-icons/fi";
@@ -72,9 +72,11 @@ const FormAddPenjualan = () => {
     });
   // setKembalian(totalasd - bayar);
   const getBarang = async () => {
-    await axios.get("https://backend-latifah-production.up.railway.app/barang").then((res) => {
-      setBarangs(res.data);
-    });
+    await axios
+      .get("https://backend-latifah-production.up.railway.app/barang")
+      .then((res) => {
+        setBarangs(res.data);
+      });
   };
 
   useEffect(() => {
@@ -86,11 +88,14 @@ const FormAddPenjualan = () => {
     // alert("kode " + kode + "barang " + JSON.stringify(keranjang));
     // setKeranjang([]);
     try {
-      await axios.post("https://backend-latifah-production.up.railway.app/invoice", {
-        kode: kode,
-        jenis: "penjualan",
-        ProdctList: keranjang,
-      });
+      await axios.post(
+        "https://backend-latifah-production.up.railway.app/invoice",
+        {
+          kode: kode,
+          jenis: "penjualan",
+          ProdctList: keranjang,
+        }
+      );
       // swal("Good job!", "transaksi berhasil dibuat", "success");
       setKeranjang([]);
       navigate("/penjualan");
