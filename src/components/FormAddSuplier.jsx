@@ -15,7 +15,7 @@ const FormAddSuplier = () => {
   const saveProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/suplier", {
+      await axios.post("https://backend-latifah-production.up.railway.app/suplier", {
         name,
         email,
         hp,

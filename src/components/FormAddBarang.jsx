@@ -15,7 +15,7 @@ const FormAddBarang = () => {
   const navigate = useNavigate();
 
   const getSuplier = async () => {
-    await axios.get("http://localhost:5000/suplier").then((res) => {
+    await axios.get("https://backend-latifah-production.up.railway.app/suplier").then((res) => {
       setSupliers(res.data);
     });
   };
@@ -27,7 +27,7 @@ const FormAddBarang = () => {
   const saveProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/barang", {
+      await axios.post("https://backend-latifah-production.up.railway.app/barang", {
         name,
         kode,
         harga,
