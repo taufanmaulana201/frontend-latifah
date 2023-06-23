@@ -18,7 +18,7 @@ const FormEditBarang = () => {
   useEffect(() => {
     const getProductById = async () => {
       try {
-        const response = await axios.get(`https://backend-latifah-production.up.railway.app/barang/${id}`);
+        const response = await axios.get(`http://localhost:5000/barang/${id}`);
         setKode(response.data.kode);
         setName(response.data.name);
         setStok(response.data.stok);
@@ -37,7 +37,7 @@ const FormEditBarang = () => {
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://backend-latifah-production.up.railway.app/barang/${id}`, {
+      await axios.patch(`http://localhost:5000/barang/${id}`, {
         name,
         harga,
         kode,
@@ -54,7 +54,7 @@ const FormEditBarang = () => {
   };
 
   const getSuplier = async () => {
-    await axios.get("https://backend-latifah-production.up.railway.app/suplier/").then((res) => {
+    await axios.get("http://localhost:5000/suplier/").then((res) => {
       setSupliers(res.data);
     });
   };

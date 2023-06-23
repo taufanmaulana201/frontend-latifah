@@ -16,6 +16,8 @@ const Login = () => {
   useEffect(() => {
     if (user || isSuccess) {
       navigate("/dashboard");
+      // console.log("useeefect nih ada usernya", user);
+      // dispatch(getMe());
     }
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
@@ -24,6 +26,8 @@ const Login = () => {
     e.preventDefault();
     dispatch(LoginUser({ email, password }));
   };
+
+  console.log("user", user);
 
   return (
     <section className="hero is-fullheight is-fullwidth">

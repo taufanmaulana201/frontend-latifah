@@ -15,7 +15,7 @@ const FormEditPengeluaran = () => {
     const getProductById = async () => {
       try {
         const response = await axios.get(
-          `https://backend-latifah-production.up.railway.app/pengeluaran/${id}`
+          `http://localhost:5000/pengeluaran/${id}`
         );
         setName(response.data.name);
         setPrice(response.data.price);
@@ -32,7 +32,7 @@ const FormEditPengeluaran = () => {
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://backend-latifah-production.up.railway.app/pengeluaran/${id}`, {
+      await axios.patch(`http://localhost:5000/pengeluaran/${id}`, {
         name: name,
         price: price,
         catatan: catatan,

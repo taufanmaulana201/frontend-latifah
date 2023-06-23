@@ -11,12 +11,12 @@ const SuplierList = () => {
   }, []);
 
   const getProducts = async () => {
-    const response = await axios.get("https://backend-latifah-production.up.railway.app/suplier");
+    const response = await axios.get("http://localhost:5000/suplier");
     setProducts(response.data);
   };
 
   const deleteProduct = async (productId) => {
-    await axios.delete(`https://backend-latifah-production.up.railway.app/suplier/${productId}`);
+    await axios.delete(`http://localhost:5000/suplier/${productId}`);
     getProducts();
   };
 

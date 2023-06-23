@@ -27,17 +27,19 @@ const FormAddPenjualan = () => {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
-  const searchbarang = (e) => {
+  const searchbarang = async (e) => {
     const { value } = e.target;
     const filter = barangs.filter(
       (data) => data.name === value || data.kode === value
     );
     setBarangFilter(filter);
-    setPenyimpanan({
-      product_id: filter[0].id,
-      name: filter[0].name,
-      price: filter[0].harga,
-      qty: qty,
+    filter.map((data) => {
+      return setPenyimpanan({
+        product_id: data.id,
+        name: data.name,
+        price: data.harga,
+        qty: qty,
+      });
     });
   };
 
@@ -68,41 +70,33 @@ const FormAddPenjualan = () => {
   keranjang &&
     keranjang.map((data) => {
       const total = data.price * data.qty;
-      totalasd += total;
+      return (totalasd += total);
     });
   // setKembalian(totalasd - bayar);
   const getBarang = async () => {
-    await axios
-      .get("https://backend-latifah-production.up.railway.app/barang")
-      .then((res) => {
-        setBarangs(res.data);
-      });
+    await axios.get("http://localhost:5000/barang").then((res) => {
+      setBarangs(res.data);
+    });
   };
 
   useEffect(() => {
     getBarang();
   }, []);
 
-  const buatTransaksi = async (e) => {
-    // e.preventDefault();
-    // alert("kode " + kode + "barang " + JSON.stringify(keranjang));
-    // setKeranjang([]);
+  // const sample = [{ product_id: 2, name: "barang 2", price: 5000, qty: 4 }];
+
+  const buatTransaksi = async () => {
     try {
-      await axios.post(
-        "https://backend-latifah-production.up.railway.app/invoice",
-        {
-          kode: kode,
-          jenis: "penjualan",
-          ProdctList: keranjang,
-        }
-      );
-      // swal("Good job!", "transaksi berhasil dibuat", "success");
+      await axios.post("http://localhost:5000/invoice", {
+        kode: kode,
+        jenis: "penjualan",
+        ProdctList: keranjang,
+      });
+      alert("transaksi berhasil dibuat");
       setKeranjang([]);
       navigate("/penjualan");
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
-      }
+      setMsg(error.message);
     }
   };
 
@@ -269,110 +263,108 @@ const FormAddPenjualan = () => {
               maxHeight: "max-content",
             }}
           >
-            <form onSubmit={buatTransaksi}>
-              <h2
-                className="subtitle"
-                style={{ fontWeight: "bold", fontSize: "25px" }}
-              >
-                Buat Tansaksi
-              </h2>
+            <h2
+              className="subtitle"
+              style={{ fontWeight: "bold", fontSize: "25px" }}
+            >
+              Buat Tansaksi
+            </h2>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
+                  width: "35%",
+                  fontSize: "20px",
+                  fontWeight: "bold",
                 }}
               >
-                <div
-                  style={{
-                    width: "35%",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Total Transaksi
-                </div>
-                <div
-                  style={{
-                    width: "65%",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginLeft: "15px",
-                  }}
-                >
-                  : Rp. {totalasd}
-                </div>
+                Total Transaksi
               </div>
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginTop: "15px",
+                  width: "65%",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginLeft: "15px",
                 }}
               >
-                <div
-                  style={{
-                    width: "35%",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Bayar
-                </div>
-                <div
-                  style={{
-                    width: "65%",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginLeft: "15px",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <div>: Rp.</div> &nbsp;
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="number"
-                        value={bayar}
-                        onChange={(e) => setBayar(e.target.value)}
-                        placeholder="masukan nominal"
-                      />
-                    </div>
+                : Rp. {totalasd}
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "15px",
+              }}
+            >
+              <div
+                style={{
+                  width: "35%",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              >
+                Bayar
+              </div>
+              <div
+                style={{
+                  width: "65%",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginLeft: "15px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div>: Rp.</div> &nbsp;
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="number"
+                      value={bayar}
+                      onChange={(e) => setBayar(e.target.value)}
+                      placeholder="masukan nominal"
+                    />
                   </div>
                 </div>
               </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "15px",
+              }}
+            >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginTop: "15px",
+                  width: "35%",
+                  fontSize: "20px",
+                  fontWeight: "bold",
                 }}
               >
-                <div
-                  style={{
-                    width: "35%",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Kembalian
-                </div>
-                <div
-                  style={{
-                    width: "65%",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginLeft: "15px",
-                  }}
-                >
-                  : Rp. {bayar - totalasd || 0}
-                </div>
+                Kembalian
               </div>
-              <div className="control" style={{ marginTop: "25px" }}>
-                <button type="submit" className="button is-info ">
-                  Buat Transaksi
-                </button>
+              <div
+                style={{
+                  width: "65%",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginLeft: "15px",
+                }}
+              >
+                : Rp. {bayar - totalasd || 0}
               </div>
-            </form>
+            </div>
+            <div className="control" style={{ marginTop: "25px" }}>
+              <button onClick={buatTransaksi} className="button is-info ">
+                Buat Transaksi
+              </button>
+            </div>
           </div>
         </div>
       </div>

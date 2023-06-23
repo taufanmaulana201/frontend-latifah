@@ -12,19 +12,19 @@ const LaporanList = () => {
   const [filtertoday, setFilterToday] = useState(hariini);
   const [filterBulan, setFilterBulan] = useState(bulanini);
 
-  console.log(filtertoday);
+  // console.log(filtertoday);
 
   useEffect(() => {
     getProducts();
   }, []);
 
   const getProducts = async () => {
-    const response = await axios.get("https://backend-latifah-production.up.railway.app/invoice");
+    const response = await axios.get("http://localhost:5000/invoice");
     setProducts(response.data);
   };
 
   const detailProduct = async (productId) => {
-    const data = await axios.get(`https://backend-latifah-production.up.railway.app/invoice/${productId}`);
+    const data = await axios.get(`http://localhost:5000/invoice/${productId}`);
     if (data) {
       swal(
         <div>

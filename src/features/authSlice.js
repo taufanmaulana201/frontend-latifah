@@ -13,13 +13,10 @@ export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (user, thunkAPI) => {
     try {
-      const response = await axios.post(
-        "https://backend-latifah-production.up.railway.app/login",
-        {
-          email: user.email,
-          password: user.password,
-        }
-      );
+      const response = await axios.post("http://localhost:5000/login", {
+        email: user.email,
+        password: user.password,
+      });
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -32,9 +29,7 @@ export const LoginUser = createAsyncThunk(
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
-    const response = await axios.get(
-      "https://backend-latifah-production.up.railway.app/me"
-    );
+    const response = await axios.get("http://localhost:5000/me");
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -45,9 +40,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
-  await axios.delete(
-    "https://backend-latifah-production.up.railway.app/logout"
-  );
+  await axios.delete("http://localhost:5000/logout");
 });
 
 export const authSlice = createSlice({
