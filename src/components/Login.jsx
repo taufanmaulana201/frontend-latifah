@@ -3,21 +3,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginUser, reset } from "../features/authSlice";
 import Logo from "../assets/logo-putih.jpg";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [barang, setBarang] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
+  const getbarang = async () => {
+    try {
+      const res = await axios.get(
+        "https://backend-latifah-production.up.railway.app/barang"
+      );
+      setBarang(res.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getbarang();
+  }, []);
 
   useEffect(() => {
     if (user || isSuccess) {
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+      navigate("/dashboard");
     }
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
@@ -28,6 +41,11 @@ const Login = () => {
   };
   return (
     <section className="hero is-fullheight is-fullwidth">
+      <div>
+        {barang.map((data) => {
+          return <p>{data.name}</p>;
+        })}
+      </div>
       <div className="hero-body">
         <div className="container">
           <div className="columns is-centered">
