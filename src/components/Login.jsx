@@ -26,9 +26,6 @@ const Login = () => {
     e.preventDefault();
     dispatch(LoginUser({ email, password }));
   };
-
-  console.log("user", user);
-
   return (
     <section className="hero is-fullheight is-fullwidth">
       <div className="hero-body">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-import swal from "@sweetalert/with-react";
 import { IoMdStats } from "react-icons/io";
+import swal from "sweetalert";
 
 const LaporanList = () => {
   const [products, setProducts] = useState([]);
