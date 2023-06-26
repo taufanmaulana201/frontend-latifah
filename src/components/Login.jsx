@@ -15,9 +15,9 @@ const Login = () => {
 
   useEffect(() => {
     if (user || isSuccess) {
-      navigate("/dashboard");
-      // console.log("useeefect nih ada usernya", user);
-      // dispatch(getMe());
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     }
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
