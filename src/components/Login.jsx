@@ -8,28 +8,31 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [barang, setBarang] = useState([]);
+  const [Barangs, setBarangs] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
+
   const getbarang = async () => {
     try {
       const res = await axios.get(
-        "https://backend-latifah-production.up.railway.app/barang"
+        "https://latifah-backend-production.up.railway.app/barang"
       );
-      setBarang(res.data);
+      setBarangs(res.data);
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     getbarang();
   }, []);
 
+  console.log("user is", user);
   useEffect(() => {
-    if (user || isSuccess) {
+    if (user) {
       navigate("/dashboard");
     }
     dispatch(reset());
@@ -42,9 +45,10 @@ const Login = () => {
   return (
     <section className="hero is-fullheight is-fullwidth">
       <div>
-        {barang.map((data) => {
-          return <p>{data.name}</p>;
-        })}
+        {Barangs &&
+          Barangs.map((data, index) => {
+            return <p key={index}>{data.name}</p>;
+          })}
       </div>
       <div className="hero-body">
         <div className="container">

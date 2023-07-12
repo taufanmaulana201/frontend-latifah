@@ -14,7 +14,7 @@ export const LoginUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const response = await axios.post(
-        "https://backend-latifah-production.up.railway.app/login",
+        "https://latifah-backend-production.up.railway.app/login",
         {
           email: user.email,
           password: user.password,
@@ -33,7 +33,7 @@ export const LoginUser = createAsyncThunk(
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
     const response = await axios.get(
-      "https://backend-latifah-production.up.railway.app/me"
+      "https://latifah-backend-production.up.railway.app/me"
     );
     return response.data;
   } catch (error) {
@@ -46,7 +46,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
   await axios.delete(
-    "https://backend-latifah-production.up.railway.app/logout"
+    "https://latifah-backend-production.up.railway.app/logout"
   );
 });
 
