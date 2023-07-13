@@ -49,6 +49,8 @@ export const LogOut = createAsyncThunk("user/LogOut", async () => {
   await axios.delete(
     "https://latifah-backend-production.up.railway.app/logout"
   );
+
+  localStorage.clear();
 });
 
 export const authSlice = createSlice({
