@@ -23,11 +23,11 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    if (user || users) {
+    if (users) {
       navigate("/dashboard");
     }
     dispatch(reset());
-  }, [user, isSuccess, dispatch, navigate, users]);
+  }, [users, isSuccess, dispatch, navigate]);
 
   const Auth = (e) => {
     e.preventDefault();
