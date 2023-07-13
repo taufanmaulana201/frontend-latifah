@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getMe } from "../features/authSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import { getMe } from "../features/authSlice";
 import SuplierList from "../components/SuplierList";
 
 const Suplier = () => {

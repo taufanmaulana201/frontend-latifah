@@ -28,7 +28,9 @@ const Welcome = () => {
 
   const getlaporan = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/invoice");
+      const data = await axios.get(
+        "https://latifah-backend-production.up.railway.app/invoice"
+      );
       SetLaporan(data.data);
     } catch (error) {
       console.log(error.message);
@@ -39,7 +41,9 @@ const Welcome = () => {
   }, []);
   const getpengeluaran = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/pengeluaran");
+      const data = await axios.get(
+        "https://latifah-backend-production.up.railway.app/pengeluaran"
+      );
       setPengeluaran(data.data);
     } catch (error) {
       console.log(error.message);
@@ -50,7 +54,9 @@ const Welcome = () => {
   }, []);
   const getBarang = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/barang");
+      const data = await axios.get(
+        "https://latifah-backend-production.up.railway.app/barang"
+      );
       setBarang(data.data);
     } catch (error) {
       console.log(error.message);

@@ -74,7 +74,7 @@ const FormAddPenjualan = () => {
     });
   // setKembalian(totalasd - bayar);
   const getBarang = async () => {
-    await axios.get("http://localhost:5000/barang").then((res) => {
+    await axios.get("https://latifah-backend-production.up.railway.app/barang").then((res) => {
       setBarangs(res.data);
     });
   };
@@ -87,7 +87,7 @@ const FormAddPenjualan = () => {
 
   const buatTransaksi = async () => {
     try {
-      await axios.post("http://localhost:5000/invoice", {
+      await axios.post("https://latifah-backend-production.up.railway.app/invoice", {
         kode: kode,
         jenis: "penjualan",
         ProdctList: keranjang,

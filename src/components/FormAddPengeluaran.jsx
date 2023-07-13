@@ -13,7 +13,7 @@ const FormAddPengeluaran = () => {
   const saveProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/pengeluaran", {
+      await axios.post("https://latifah-backend-production.up.railway.app/pengeluaran", {
         name: name,
         price: price,
         catatan: catatan,

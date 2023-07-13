@@ -12,12 +12,12 @@ const PengeluaranList = () => {
   }, []);
 
   const getProducts = async () => {
-    const response = await axios.get("http://localhost:5000/pengeluaran");
+    const response = await axios.get("https://latifah-backend-production.up.railway.app/pengeluaran");
     setProducts(response.data);
   };
 
   const deleteProduct = async (productId) => {
-    await axios.delete(`http://localhost:5000/pengeluaran/${productId}`);
+    await axios.delete(`https://latifah-backend-production.up.railway.app/pengeluaran/${productId}`);
     getProducts();
   };
 
