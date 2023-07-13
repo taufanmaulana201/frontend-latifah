@@ -30,7 +30,7 @@ const Login = () => {
     getbarang();
   }, []);
 
-  console.log("user is", user);
+  // console.log("user is", user);
   useEffect(() => {
     if (user) {
       navigate("/dashboard");

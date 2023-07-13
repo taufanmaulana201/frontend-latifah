@@ -17,7 +17,7 @@ const Dashboard = () => {
     } else {
       setUser(datapengguna);
     }
-  }, []);
+  }, [navigate]);
   // const dispatch = useDispatch();
   // const { isError, user } = useSelector((state) => state.auth);
 
