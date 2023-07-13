@@ -18,7 +18,9 @@ const FormEditBarang = () => {
   useEffect(() => {
     const getProductById = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/barang/${id}`);
+        const response = await axios.get(
+          `https://latifah-backend-production.up.railway.app/barang/${id}`
+        );
         setKode(response.data.kode);
         setName(response.data.name);
         setStok(response.data.stok);
@@ -37,14 +39,17 @@ const FormEditBarang = () => {
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/barang/${id}`, {
-        name,
-        harga,
-        kode,
-        stok,
-        suplierId,
-        catatan,
-      });
+      await axios.patch(
+        `https://latifah-backend-production.up.railway.app/barang/${id}`,
+        {
+          name,
+          harga,
+          kode,
+          stok,
+          suplierId,
+          catatan,
+        }
+      );
       navigate("/barang");
     } catch (error) {
       if (error.response) {
@@ -54,9 +59,11 @@ const FormEditBarang = () => {
   };
 
   const getSuplier = async () => {
-    await axios.get("http://localhost:5000/suplier/").then((res) => {
-      setSupliers(res.data);
-    });
+    await axios
+      .get("https://latifah-backend-production.up.railway.app/suplier/")
+      .then((res) => {
+        setSupliers(res.data);
+      });
   };
 
   useEffect(() => {

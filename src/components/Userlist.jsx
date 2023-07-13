@@ -12,14 +12,14 @@ const Userlist = () => {
 
   const getUsers = async () => {
     const response = await axios.get(
-      "http://localhost:5000/users"
+      "https://latifah-backend-production.up.railway.app/users"
     );
     setUsers(response.data);
   };
 
   const deleteUser = async (userId) => {
     await axios.delete(
-      `http://localhost:5000/users/${userId}`
+      `https://latifah-backend-production.up.railway.app/users/${userId}`
     );
     getUsers();
   };

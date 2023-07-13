@@ -15,9 +15,11 @@ const FormAddBarang = () => {
   const navigate = useNavigate();
 
   const getSuplier = async () => {
-    await axios.get("http://localhost:5000/suplier").then((res) => {
-      setSupliers(res.data);
-    });
+    await axios
+      .get("https://latifah-backend-production.up.railway.app/suplier")
+      .then((res) => {
+        setSupliers(res.data);
+      });
   };
 
   useEffect(() => {
@@ -27,14 +29,17 @@ const FormAddBarang = () => {
   const saveProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/barang", {
-        name,
-        kode,
-        harga,
-        stok,
-        catatan,
-        suplierId,
-      });
+      await axios.post(
+        "https://latifah-backend-production.up.railway.app/barang",
+        {
+          name,
+          kode,
+          harga,
+          stok,
+          catatan,
+          suplierId,
+        }
+      );
       navigate("/barang");
     } catch (error) {
       if (error.response) {

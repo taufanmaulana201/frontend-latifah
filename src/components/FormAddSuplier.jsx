@@ -15,13 +15,16 @@ const FormAddSuplier = () => {
   const saveProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/suplier", {
-        name,
-        email,
-        hp,
-        alamat,
-        catatan,
-      });
+      await axios.post(
+        "https://latifah-backend-production.up.railway.app/suplier",
+        {
+          name,
+          email,
+          hp,
+          alamat,
+          catatan,
+        }
+      );
       navigate("/suplier");
     } catch (error) {
       if (error.response) {
