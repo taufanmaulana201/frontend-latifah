@@ -15,12 +15,8 @@ const Sidebar = () => {
 
   useEffect(() => {
     const datapengguna = JSON.parse(localStorage.getItem("user"));
-    if (!datapengguna) {
-      navigate("/");
-    } else {
-      setUsers(datapengguna);
-    }
-  }, [navigate]);
+    setUsers(datapengguna);
+  }, []);
 
   const logout = () => {
     dispatch(LogOut());
