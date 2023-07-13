@@ -17,17 +17,13 @@ const Login = () => {
 
   // console.log("user is", user);
 
+  
   useEffect(() => {
-    const datapengguna = JSON.parse(localStorage.getItem("user"));
-    setUsers(datapengguna);
-  }, []);
-
-  useEffect(() => {
-    if (users) {
+    if (user) {
       navigate("/dashboard");
     }
     dispatch(reset());
-  }, [users, isSuccess, dispatch, navigate]);
+  }, [user, isSuccess, dispatch, navigate]);
 
   const Auth = (e) => {
     e.preventDefault();
