@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoPerson, IoHome, IoLogOut } from "react-icons/io5";
 import { IoMdStats } from "react-icons/io";
@@ -11,6 +11,16 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const datapengguna = JSON.parse(localStorage.getItem("user"));
+    if (!datapengguna) {
+      navigate("/");
+    } else {
+      setUsers(datapengguna);
+    }
+  }, [navigate]);
 
   const logout = () => {
     dispatch(LogOut());
@@ -66,7 +76,7 @@ const Sidebar = () => {
           </li>
         </ul>
 
-        {user && user.role === "admin" && (
+        {users && users.role === "admin" && (
           <div>
             <p className="menu-label">Admin</p>
             <ul className="menu-list">

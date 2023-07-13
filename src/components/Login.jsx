@@ -3,40 +3,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginUser, reset } from "../features/authSlice";
 import Logo from "../assets/logo-putih.jpg";
-import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [Barangs, setBarangs] = useState([]);
+  const [users, setUsers] = useState([]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
 
-  const getbarang = async () => {
-    try {
-      const res = await axios.get(
-        "https://latifah-backend-production.up.railway.app/barang"
-      );
-      setBarangs(res.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // console.log("user is", user);
 
   useEffect(() => {
-    getbarang();
+    const datapengguna = JSON.parse(localStorage.getItem("user"));
+    setUsers(datapengguna);
   }, []);
 
-  // console.log("user is", user);
   useEffect(() => {
-    if (user) {
+    if (user || users) {
       navigate("/dashboard");
     }
     dispatch(reset());
-  }, [user, isSuccess, dispatch, navigate]);
+  }, [user, isSuccess, dispatch, navigate, users]);
 
   const Auth = (e) => {
     e.preventDefault();
@@ -44,12 +35,6 @@ const Login = () => {
   };
   return (
     <section className="hero is-fullheight is-fullwidth">
-      <div>
-        {Barangs &&
-          Barangs.map((data, index) => {
-            return <p key={index}>{data.name}</p>;
-          })}
-      </div>
       <div className="hero-body">
         <div className="container">
           <div className="columns is-centered">
