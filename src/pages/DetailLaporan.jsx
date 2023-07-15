@@ -7,6 +7,8 @@ const DetailLaporan = () => {
   const [Detail, setDetail] = useState({});
   const { id } = useParams();
 
+  console.log("id is", id);
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState([]);
@@ -26,9 +28,8 @@ const DetailLaporan = () => {
       `https://latifah-backend-production.up.railway.app/invoice/${id}`
     );
     setDetail(data);
+    console.log("detail laporan", data);
   };
-
-  console.log("detail laporan", Detail);
 
   useEffect(() => {
     detailProduct();
