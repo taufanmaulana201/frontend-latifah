@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const DetailLaporan = () => {
-  // const [Detail, setDetail] = useState({});
   const { id } = useParams();
+  const [data, setData] = useState(null);
 
-  // console.log("id is", id);
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+  console.log("user dashboard", user.name);
 
-  // const [user, setUser] = useState([]);
-  // console.log("user dashboard", user.name);
+  useEffect(() => {
+    const datapengguna = JSON.parse(localStorage.getItem("user"));
+    if (!datapengguna) {
+      navigate("/");
+    } else {
+      setUser(datapengguna);
+    }
+  }, [navigate]);
 
-  // useEffect(() => {
-  //   const datapengguna = JSON.parse(localStorage.getItem("user"));
-  //   if (!datapengguna) {
-  //     navigate("/");
-  //   } else {
-  //     setUser(datapengguna);
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    const response = axios.get(
+      `https://latifah-backend-production.up.railway.app/invoice/${id}`
+    );
+    setData(response);
+  }, [id]);
 
-  // const detailProduct = async () => {
-  //   const data = await axios.get(
-  //     `https://latifah-backend-production.up.railway.app/invoice/${id}`
-  //   );
-  //   setDetail(data);
-  //   console.log("detail laporan", data);
-  // };
-
-  // useEffect(() => {
-  //   detailProduct();
-  // }, []);
+  console.log(data.data);
 
   return (
     <div>
-      {/* <h1 style={{ fontWeight: "bold", fontSize: "25px" }}>Detail Transaksi</h1>
+      <Link to={"/laporan"}>kembali</Link>
+      <h1 style={{ fontWeight: "bold", fontSize: "25px" }}>Detail Transaksi</h1>
       <div style={{ width: "100%", marginTop: "20px" }}>
         <div
           style={{
@@ -47,7 +43,7 @@ const DetailLaporan = () => {
         >
           <div style={{ width: "35%", textAlign: "left" }}>Kode Transaksi</div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : {Detail.data.kode}
+            : {data.data.kode}
           </div>
         </div>
       </div>
@@ -62,7 +58,7 @@ const DetailLaporan = () => {
             Tanggal Transaksi
           </div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : {moment(Detail.data.createdAt).format("L")}
+            : {moment(data.data.createdAt).format("L")}
           </div>
         </div>
       </div>
@@ -75,7 +71,7 @@ const DetailLaporan = () => {
         >
           <div style={{ width: "35%", textAlign: "left" }}>Total Transaksi</div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : Rp. {Detail.data.total}
+            : Rp. {data.data.total}
           </div>
         </div>
       </div>
@@ -91,7 +87,7 @@ const DetailLaporan = () => {
             </tr>
           </thead>
           <tbody>
-            {Detail.data.ProductInvoices.map((product, index) => (
+            {data.data.ProductInvoices.map((product, index) => (
               <tr key={product.uuid}>
                 <td>{index + 1}</td>
                 <td>{product.name}</td>
@@ -102,9 +98,7 @@ const DetailLaporan = () => {
             ))}
           </tbody>
         </table>
-      </div> */}
-      <p>muncul ga</p>
-      <p>{id}</p>
+      </div>
     </div>
   );
 };
