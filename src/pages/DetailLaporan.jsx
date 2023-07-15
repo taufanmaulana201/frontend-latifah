@@ -4,40 +4,40 @@ import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 
 const DetailLaporan = () => {
-  const [Detail, setDetail] = useState({});
+  // const [Detail, setDetail] = useState({});
   const { id } = useParams();
 
-  console.log("id is", id);
+  // console.log("id is", id);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [user, setUser] = useState([]);
-  console.log("user dashboard", user.name);
+  // const [user, setUser] = useState([]);
+  // console.log("user dashboard", user.name);
 
-  useEffect(() => {
-    const datapengguna = JSON.parse(localStorage.getItem("user"));
-    if (!datapengguna) {
-      navigate("/");
-    } else {
-      setUser(datapengguna);
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const datapengguna = JSON.parse(localStorage.getItem("user"));
+  //   if (!datapengguna) {
+  //     navigate("/");
+  //   } else {
+  //     setUser(datapengguna);
+  //   }
+  // }, [navigate]);
 
-  const detailProduct = async () => {
-    const data = await axios.get(
-      `https://latifah-backend-production.up.railway.app/invoice/${id}`
-    );
-    setDetail(data);
-    console.log("detail laporan", data);
-  };
+  // const detailProduct = async () => {
+  //   const data = await axios.get(
+  //     `https://latifah-backend-production.up.railway.app/invoice/${id}`
+  //   );
+  //   setDetail(data);
+  //   console.log("detail laporan", data);
+  // };
 
-  useEffect(() => {
-    detailProduct();
-  }, []);
+  // useEffect(() => {
+  //   detailProduct();
+  // }, []);
 
   return (
     <div>
-      <h1 style={{ fontWeight: "bold", fontSize: "25px" }}>Detail Transaksi</h1>
+      {/* <h1 style={{ fontWeight: "bold", fontSize: "25px" }}>Detail Transaksi</h1>
       <div style={{ width: "100%", marginTop: "20px" }}>
         <div
           style={{
@@ -102,7 +102,9 @@ const DetailLaporan = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
+      <p>muncul ga</p>
+      <p>{id}</p>
     </div>
   );
 };
