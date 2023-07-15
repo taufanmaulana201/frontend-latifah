@@ -23,7 +23,7 @@ const DetailLaporan = () => {
 
   const getdata = async () => {
     const res = await axios.get(
-      `https://latifah-backend-production.up.railway.app/invoice${id}`
+      `https://latifah-backend-production.up.railway.app/invoice/${id}`
     );
     setData(res.data);
   };
