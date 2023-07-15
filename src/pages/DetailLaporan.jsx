@@ -28,6 +28,8 @@ const DetailLaporan = () => {
     setDetail(data.data);
   };
 
+  console.log("detail laporan", Detail);
+
   useEffect(() => {
     detailProduct();
   }, []);
@@ -43,7 +45,9 @@ const DetailLaporan = () => {
           }}
         >
           <div style={{ width: "35%", textAlign: "left" }}>Kode Transaksi</div>
-          <div style={{ width: "75%", textAlign: "left" }}>: {Detail.kode}</div>
+          <div style={{ width: "75%", textAlign: "left" }}>
+            : {Detail.data.kode}
+          </div>
         </div>
       </div>
       <div style={{ width: "100%" }}>
@@ -57,7 +61,7 @@ const DetailLaporan = () => {
             Tanggal Transaksi
           </div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : {moment(Detail.createdAt).format("L")}
+            : {moment(Detail.data.createdAt).format("L")}
           </div>
         </div>
       </div>
@@ -70,7 +74,7 @@ const DetailLaporan = () => {
         >
           <div style={{ width: "35%", textAlign: "left" }}>Total Transaksi</div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : Rp. {Detail.total}
+            : Rp. {Detail.data.total}
           </div>
         </div>
       </div>
@@ -86,7 +90,7 @@ const DetailLaporan = () => {
             </tr>
           </thead>
           <tbody>
-            {Detail.ProductInvoices.map((product, index) => (
+            {Detail.data.ProductInvoices.map((product, index) => (
               <tr key={product.uuid}>
                 <td>{index + 1}</td>
                 <td>{product.name}</td>
