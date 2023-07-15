@@ -18,6 +18,7 @@ import AddSuplier from "./pages/AddSuplier";
 import EditSuplier from "./pages/EditSuplier";
 import Penjualan from "./pages/Penjualan";
 import Laporan from "./pages/Laporan";
+import DetailLaporan from "./pages/DetailLaporan";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/suplier/edit/:id" element={<EditSuplier />} />
           <Route path="/penjualan" element={<Penjualan />} />
           <Route path="/laporan" element={<Laporan />} />
+          <Route path="/laporan/detail/:id" element={<DetailLaporan />} />
         </Routes>
       </BrowserRouter>
     </div>

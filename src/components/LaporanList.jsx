@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import { IoMdStats } from "react-icons/io";
-import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const LaporanList = () => {
   const [products, setProducts] = useState([]);
@@ -14,97 +14,21 @@ const LaporanList = () => {
 
   // console.log(filtertoday);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getProducts();
   }, []);
 
   const getProducts = async () => {
-    const response = await axios.get("https://latifah-backend-production.up.railway.app/invoice");
+    const response = await axios.get(
+      "https://latifah-backend-production.up.railway.app/invoice"
+    );
     setProducts(response.data);
   };
 
-  const detailProduct = async (productId) => {
-    const data = await axios.get(`https://latifah-backend-production.up.railway.app/invoice/${productId}`);
-    if (data) {
-      swal(
-        <div>
-          {/* <p>{data}</p> */}
-
-          <h1 style={{ fontWeight: "bold", fontSize: "25px" }}>
-            Detail Transaksi
-          </h1>
-          <div style={{ width: "100%", marginTop: "20px" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ width: "35%", textAlign: "left" }}>
-                Kode Transaksi
-              </div>
-              <div style={{ width: "75%", textAlign: "left" }}>
-                : {data.data.kode}
-              </div>
-            </div>
-          </div>
-          <div style={{ width: "100%" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ width: "35%", textAlign: "left" }}>
-                Tanggal Transaksi
-              </div>
-              <div style={{ width: "75%", textAlign: "left" }}>
-                : {moment(data.data.createdAt).format("L")}
-              </div>
-            </div>
-          </div>
-          <div style={{ width: "100%" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ width: "35%", textAlign: "left" }}>
-                Total Transaksi
-              </div>
-              <div style={{ width: "75%", textAlign: "left" }}>
-                : Rp. {data.data.total}
-              </div>
-            </div>
-          </div>
-          <div style={{ textAlign: "left", marginTop: "25px" }}>
-            <table className="table is-striped is-fullwidth">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Barang</th>
-                  <th>Harga</th>
-                  <th>Qty</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.data.ProductInvoices.map((product, index) => (
-                  <tr key={product.uuid}>
-                    <td>{index + 1}</td>
-                    <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{product.qty}</td>
-                    <td>{product.total}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      );
-    }
+  const detailProduct = (id) => {
+    navigate(`/laporan/detail/${id}`);
   };
 
   return (

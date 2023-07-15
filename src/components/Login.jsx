@@ -7,7 +7,6 @@ import Logo from "../assets/logo-putih.jpg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [users, setUsers] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,7 +16,6 @@ const Login = () => {
 
   // console.log("user is", user);
 
-  
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
