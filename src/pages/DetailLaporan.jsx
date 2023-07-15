@@ -4,7 +4,7 @@ import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 
 const DetailLaporan = () => {
-  const [Detail, setDetail] = useState(null);
+  const [Detail, setDetail] = useState({});
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const DetailLaporan = () => {
     const data = await axios.get(
       `https://latifah-backend-production.up.railway.app/invoice/${id}`
     );
-    setDetail(data.data);
+    setDetail(data);
   };
 
   console.log("detail laporan", Detail);
