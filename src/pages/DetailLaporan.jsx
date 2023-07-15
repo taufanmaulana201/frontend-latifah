@@ -28,7 +28,7 @@ const DetailLaporan = () => {
     setData(response);
   }, [id]);
 
-  console.log(data.data);
+  console.log("data", data);
 
   return (
     <div>
@@ -42,9 +42,7 @@ const DetailLaporan = () => {
           }}
         >
           <div style={{ width: "35%", textAlign: "left" }}>Kode Transaksi</div>
-          <div style={{ width: "75%", textAlign: "left" }}>
-            : {data.data.kode}
-          </div>
+          <div style={{ width: "75%", textAlign: "left" }}>: {data.kode}</div>
         </div>
       </div>
       <div style={{ width: "100%" }}>
@@ -58,7 +56,7 @@ const DetailLaporan = () => {
             Tanggal Transaksi
           </div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : {moment(data.data.createdAt).format("L")}
+            : {moment(data.createdAt).format("L")}
           </div>
         </div>
       </div>
@@ -71,7 +69,7 @@ const DetailLaporan = () => {
         >
           <div style={{ width: "35%", textAlign: "left" }}>Total Transaksi</div>
           <div style={{ width: "75%", textAlign: "left" }}>
-            : Rp. {data.data.total}
+            : Rp. {data.total}
           </div>
         </div>
       </div>
@@ -87,7 +85,7 @@ const DetailLaporan = () => {
             </tr>
           </thead>
           <tbody>
-            {data.data.ProductInvoices.map((product, index) => (
+            {data.ProductInvoices.map((product, index) => (
               <tr key={product.uuid}>
                 <td>{index + 1}</td>
                 <td>{product.name}</td>
