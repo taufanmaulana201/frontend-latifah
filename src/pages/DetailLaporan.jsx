@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 const DetailLaporan = () => {
   const { id } = useParams();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -26,9 +26,8 @@ const DetailLaporan = () => {
       `https://latifah-backend-production.up.railway.app/invoice/${id}`
     );
     setData(response);
-  }, [id]);
-
-  console.log("data", data);
+    console.log("data", data);
+  }, [id, data]);
 
   return (
     <div>
